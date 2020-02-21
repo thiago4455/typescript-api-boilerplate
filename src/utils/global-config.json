@@ -1,0 +1,11 @@
+{
+    "database": {
+        "user": "postgres",
+        "host": "localhost",
+        "database": "dbBoilerplate",
+        "password": "password",
+        "max": 10,
+        "port": 5432,
+        "idleTimeoutMillis": 30000
+    }
+}
