@@ -4,7 +4,6 @@ import { QueryResult } from 'pg';
 
 const QueryPromise = (query: string): Promise<QueryResult> =>
 new Promise((resolve,reject) => {
-    console.log(query)
     pool.query(query,
         (error,results) => {
             if(error) {
@@ -18,13 +17,20 @@ new Promise((resolve,reject) => {
 
 export const getUsers = (name: string): Promise<QueryResult> =>
 QueryPromise(`
-    SELECT * FROM users
+    SELECT id,name,email FROM users
     ${name?`WHERE name LIKE '%${name}%'`:''};
 `);
 
 
-export const addUser = (name: string, email: string): Promise<QueryResult>  => 
+export const addUser = (name: string, email: string, password: string): Promise<QueryResult>  => 
 QueryPromise(`
-    INSERT INTO users (name, email)
-        VALUES ('${name}', '${email}');
+    INSERT INTO users (name, email, password)
+        VALUES ('${name}', '${email}', '${password}');
+`);
+
+
+export const getUser = (email: string): Promise<QueryResult> =>
+QueryPromise(`
+    SELECT * FROM users
+    WHERE email = '${email}';
 `);

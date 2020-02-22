@@ -1,9 +1,10 @@
 {
-    "database": {
+    "DATABASE": {
         "user": "postgres",
         "host": "localhost",
         "database": "dbBoilerplate",
         "password": "password",
         "port": 5432
-    }
+    },
+    "SECRET_KEY": "superhypersecretkeydontshare"
 }
