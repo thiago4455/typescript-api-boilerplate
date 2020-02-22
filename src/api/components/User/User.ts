@@ -45,7 +45,7 @@ export const LOGIN = async (req: Request,res: Response): Promise<void> => {
                         .status(200).json({
                             id: user.id,
                             email: user.email,
-                            password: user.password
+                            name: user.name
                         })
                     }
                     else
