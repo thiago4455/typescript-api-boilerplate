@@ -8,7 +8,7 @@ import {getUsers, addUser, getUser} from './User.Services';
 //Search users
 export const GET = (req: AuthRequest,res: Response): void => {
     getUsers(req.query.name).then(r => 
-        res.status(200).json(r.rows)
+        res.status(200).json(r)
     )
     .catch(e =>
         res.status(500).json(e)
@@ -22,7 +22,7 @@ export const POST = async (req: Request,res: Response): Promise<void> => {
     const _password = await bcrypt.hash(password,salt);
 
     addUser(name,email,_password).then(r => 
-        res.status(200).json(r.rows)
+        res.status(200).json(r)
     )
     .catch(e =>
         res.status(500).json(e)
@@ -34,17 +34,18 @@ export const LOGIN = async (req: Request,res: Response): Promise<void> => {
     const { email, password } = req.body;
 
     getUser(email).then(r => {
-            if(r.rows.length>0){
-                bcrypt.compare(password, r.rows[0].password).then(match => {
+            if(r.length>0){
+                const user = r[0];
+                bcrypt.compare(password, user.password).then(match => {
 
                     //Send authentication token
                     if(match){
-                        const token = jwt.sign({id: r.rows[0].id}, SECRET_KEY)
+                        const token = jwt.sign({id: user.id}, SECRET_KEY)
                         res.header('Authorization', token)
                         .status(200).json({
-                            id: r.rows[0].id,
-                            email: r.rows[0].email,
-                            password: r.rows[0].password
+                            id: user.id,
+                            email: user.email,
+                            password: user.password
                         })
                     }
                     else
