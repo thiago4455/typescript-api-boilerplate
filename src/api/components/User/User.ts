@@ -18,6 +18,12 @@ export const GET = (req: AuthRequest,res: Response): void => {
 //Register
 export const POST = async (req: Request,res: Response): Promise<void> => {
     const { name, email, password } = req.body;
+    if(!(name&&email&&password)){
+        res.status(400).send('Invalid parameters');
+        return;
+    }
+
+   
     const salt = await bcrypt.genSalt();
     const _password = await bcrypt.hash(password,salt);
 
@@ -32,6 +38,10 @@ export const POST = async (req: Request,res: Response): Promise<void> => {
 //Login
 export const LOGIN = async (req: Request,res: Response): Promise<void> => {
     const { email, password } = req.body;
+    if(!(email&&password)){
+        res.status(400).send('Invalid parameters');
+        return;
+    }
 
     getUser(email).then(r => {
             if(r.length>0){

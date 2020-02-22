@@ -7,5 +7,5 @@ CREATE TABLE users (
   password CHAR(60)
 );
 
-INSERT INTO users (name, email)
+INSERT INTO users (name, email, password)
   VALUES ('Bill', 'bill@example.com','$2a$10$euV/jvBL4n35i.tmW/qJvOhZTHpa/x5KJJljqGmfmxZbgor2Xj6Ui');
