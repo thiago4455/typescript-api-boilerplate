@@ -26,8 +26,8 @@ Make sure you have a PostgreSQL database set up
 
 ```bash
 #!/bin/bash
-$ git clone https://github.com/thiago4455/typescript-boilerplate.git
-$ cd typescript-boilerplate
+$ git clone https://github.com/thiago4455/typescript-api-boilerplate.git
+$ cd typescript-api-boilerplate
 $ npm instal
 
 # Start server
